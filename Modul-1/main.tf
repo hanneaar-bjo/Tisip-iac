@@ -8,19 +8,19 @@ terraform {
 }
 
 provider "azurerm" {
-  subscription_id = "a3adf20e-4966-4afb-b717-4de1baae6db1"
+  subscription_id = "7a3c6854-0fe1-42eb-b5b9-800af1e53d70"
   features {
     
   }
 }
 
 resource "azurerm_resource_group" "fd-rg" {
-  name     = "rg-demo-we-tim" # Use a unique name for the resource group, prefix or suffix with your initials tim-demo-rg-we / rg-demo-we-tim
+  name     = "rg-demo-we-hanne" # Use a unique name for the resource group, prefix or suffix with your initials tim-demo-rg-we / rg-demo-we-tim
   location = "West Europe"
 }
 
 resource "azurerm_storage_account" "sa-demo" {
-  name                     = "timdsfssmo1qfder"
+  name                     = "hannedsfssmo1qfder"
   resource_group_name      = azurerm_resource_group.fd-rg.name
   location                 = azurerm_resource_group.fd-rg.location
   account_tier             = "Standard"
