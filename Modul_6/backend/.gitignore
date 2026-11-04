@@ -1,0 +1,29 @@
+# =============================================================================
+#  backend/.gitignore
+# -----------------------------------------------------------------------------
+#  Bootstrap-stacken kjører på LOKAL state. Det gjør denne fila viktigere her
+#  enn noe annet sted i repoet: terraform.tfstate ligger fysisk i mappa, og
+#  inneholder blant annet IDene til hvelvet og storage-kontoen.
+#
+#  Kardinalregelen fra modul 3 gjelder uansett hvor staten ligger: state er
+#  ikke hemmelig fordi du behandler den forsiktig – den er hemmelig fordi alt
+#  som er sensitivt i konfigurasjonen din ligger der i klartekst.
+# =============================================================================
+ 
+# State – aldri i versjonskontroll
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+ 
+# Providere og moduler, lastet ned av init. Kan alltid hentes på nytt.
+.terraform/
+.terraform.lock.hcl
+ 
+# Dine verdier. .eksempel-fila sjekkes inn, denne ikke.
+terraform.tfvars
+ 
+# Planfiler kan inneholde hele den kommende staten, inkludert secrets.
+*.tfplan
+ 
+# Crash-logger fra Terraform kan inneholde variabelverdier.
+crash.log
