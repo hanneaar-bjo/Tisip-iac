@@ -18,7 +18,10 @@ resource "azurerm_resource_group" "demo" {
   location = var.location
 
   tags = {
-    module = "module_7"
+    owner      = "hab86"
+    course     = "iac"
+    module     = "module_7"
+    managed_by = "pipeline"
   }
 }
 
