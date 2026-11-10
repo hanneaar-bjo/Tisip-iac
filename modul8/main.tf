@@ -1,0 +1,40 @@
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 5.4"
+    }
+  }
+
+  backend "azurerm" {}
+}
+
+provider "azurerm" {
+  features {}
+}
+
+locals {
+  name_prefix = "${var.kortnavn}-${var.project}"
+
+  common_tags = {
+    owner      = var.kortnavn
+    course     = "iac"
+    module     = "modul8"
+    managed_by = "pipeline"
+  }
+}
+
+resource "azurerm_resource_group" "main" {
+  name     = "${local.name_prefix}-rg"
+  location = var.location
+  tags     = local.common_tags
+}
+
+module "network" {
+  source = "./modules/network"
+
+  name_prefix         = local.name_prefix
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+  tags                = local.common_tags
+}
